@@ -11,7 +11,7 @@ app.post('/execute', async (req, res) => {
     console.log("Activity Triggered for Subscriber:", inArgs.email);
 
     // Replace this URL with your unique URL from Webhook.site
-    const WEBHOOK_URL = 'https://webhook.site/YOUR_UNIQUE_ID';
+    const WEBHOOK_URL = 'https://webhook.site/c57d15f0-574c-4b20-a6bd-6040ff6af083';
 
     try {
         await axios.post(WEBHOOK_URL, {
