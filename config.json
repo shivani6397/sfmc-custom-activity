@@ -1,0 +1,20 @@
+{
+    "workflowApiVersion": "1.1",
+    "metaData": { "category": "message", "icon": "icon.png" },
+    "type": "REST",
+    "lang": { "en-US": { "name": "Cloud Slack Activity", "description": "Sends data to Webhook" } },
+    "arguments": {
+        "execute": {
+            "inArguments": [],
+            "url": "REPLACE_WITH_RENDER_URL/execute"
+        }
+    },
+    "configurationArguments": {
+        "save": { "url": "REPLACE_WITH_RENDER_URL/save" },
+        "publish": { "url": "REPLACE_WITH_RENDER_URL/publish" },
+        "validate": { "url": "REPLACE_WITH_RENDER_URL/validate" }
+    },
+    "userInterfaces": {
+        "configModal": { "height": 250, "width": 500 }
+    }
+}

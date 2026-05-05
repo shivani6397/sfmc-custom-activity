@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Custom Activity UI</title>
+    <script src="https://cdn.jsdelivr.net/gh/salesforce-marketingcloud/postmonger/postmonger.js"></script>
+    <style>
+        body { font-family: 'Salesforce Sans', Arial, sans-serif; padding: 20px; background: #f4f6f9; }
+        .container { background: white; padding: 20px; border-radius: 5px; border: 1px solid #d8dde6; }
+        label { display: block; margin-bottom: 8px; font-weight: bold; }
+        input { width: 100%; padding: 10px; border: 1px solid #dddbda; border-radius: 4px; box-sizing: border-box; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <label>Slack Message Content</label>
+        <input type="text" id="msgInput" placeholder="Type the message to send...">
+    </div>
+    
+    <script>
+        var connection = new Postmonger.Session();
+        connection.trigger('ready');
+
+        connection.on('initActivity', function(data) {
+            if (data && data.arguments && data.arguments.execute.inArguments[0]) {
+                document.getElementById('msgInput').value = data.arguments.execute.inArguments[0].message || "";
+            }
+        });
+
+        connection.on('clickedNext', function() {
+            var messageValue = document.getElementById('msgInput').value;
+            connection.trigger('updateActivity', {
+                arguments: {
+                    execute: {
+                        inArguments: [
+                            { "message": messageValue },
+                            { "email": "{{Contact.Attribute.EmailAddress}}" }
+                        ]
+                    }
+                },
+                metaData: { isConfigured: true }
+            });
+        });
+    </script>
+</body>
+</html>
